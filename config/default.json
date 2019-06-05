@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://stephRabbit:stephRabbit@devlink-setuc.mongodb.net/test?retryWrites=true"
+  "mongoURI": "mongodb+srv://stephRabbit:stephRabbit@devlink-setuc.mongodb.net/test?retryWrites=true",
+  "jwtSecert": "09uj019mskdjkdj019mf10r0mf909n58bu549m8cdj023m9x203u"
 }
