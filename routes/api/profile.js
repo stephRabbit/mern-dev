@@ -198,7 +198,16 @@ router.put(
       current,
       description
     } = req.body
-    const nexExp = { title, company, location, from, to, current, description }
+
+    const nexExp = {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description
+    }
 
     try {
       const profile = await Profile.findOne({ user: req.user.id })
@@ -218,7 +227,9 @@ router.put(
 router.delete('/experience/:exp_id', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id })
-    const index = profile.experience.findIndex(exp => exp.id === req.params.exp_id)
+    const index = profile.experience.findIndex(
+      exp => exp.id === req.params.exp_id
+    )
     profile.experience.splice(index, 1)
     await profile.save()
     res.json(profile)
@@ -262,7 +273,16 @@ router.put(
       current,
       description
     } = req.body
-    const nexEducation = { school, degree, fieldofstudy, from, to, current, description }
+
+    const nexEducation = {
+      school,
+      degree,
+      fieldofstudy,
+      from,
+      to,
+      current,
+      description
+    }
 
     try {
       const profile = await Profile.findOne({ user: req.user.id })
@@ -282,7 +302,9 @@ router.put(
 router.delete('/education/:education_id', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id })
-    const index = profile.education.findIndex(ed => ed.id === req.params.education_id)
+    const index = profile.education.findIndex(
+      ed => ed.id === req.params.education_id
+    )
     profile.education.splice(index, 1)
     await profile.save()
     res.json(profile)
