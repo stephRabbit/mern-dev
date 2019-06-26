@@ -1,13 +1,12 @@
 import React, { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import PropTypes from 'prop-types'
 
-
 import { setAlert } from '../../store/ducks/alert/actions'
+import { registerUser } from '../../store/ducks/auth/actions'
 
-const Register = ({ setAlert }) => {
+const Register = ({ registerUser, setAlert }) => {
   const [fromData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,27 +25,8 @@ const Register = ({ setAlert }) => {
     e.preventDefault()
     if (password !== password2) {
       setAlert('Passwords do not match!', 'danger')
-      console.log('Passwords do not match!')
     } else {
-      console.log(fromData)
-      const newUser = {
-        name,
-        email,
-        password
-      }
-
-      try {
-        const config = {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-        const body = JSON.stringify(newUser)
-        const res = await axios.post('api/users', body, config)
-        console.log(res.data)
-      } catch (error) {
-        console.error(error.response.data)
-      }
+      registerUser({ name, email, password })
     }
   }
 
@@ -110,10 +90,13 @@ const Register = ({ setAlert }) => {
 }
 
 Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = dispatch => ({
+  registerUser: ({ name, email, password }) =>
+    dispatch(registerUser({ name, email, password })),
   setAlert: (msg, type) => dispatch(setAlert(msg, type))
 })
 
