@@ -1,8 +1,13 @@
 import React, { Fragment, useState } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import PropTypes from 'prop-types'
 
-const Register = () => {
+
+import { setAlert } from '../../store/ducks/alert/actions'
+
+const Register = ({ setAlert }) => {
   const [fromData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,6 +25,7 @@ const Register = () => {
   const onSubmit = async e => {
     e.preventDefault()
     if (password !== password2) {
+      setAlert('Passwords do not match!', 'danger')
       console.log('Passwords do not match!')
     } else {
       console.log(fromData)
@@ -91,7 +97,7 @@ const Register = () => {
             type='password'
             placeholder='Confirm Password'
             name='password2'
-            minLength='6'
+            minLength='5'
           />
         </div>
         <input type='submit' className='btn btn-primary' value='Register' />
@@ -103,4 +109,15 @@ const Register = () => {
   )
 }
 
-export default Register
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired
+}
+
+const mapDispatchToProps = dispatch => ({
+  setAlert: (msg, type) => dispatch(setAlert(msg, type))
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Register)
