@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { setAlert } from '../../store/ducks/alert/actions'
 import { registerUser } from '../../store/ducks/auth/actions'
 
-const Register = ({ registerUser, setAlert }) => {
+const Register = ({ registerUser, setAlert, isAuth }) => {
   const [fromData, setFormData] = useState({
     name: '',
     email: '',
@@ -28,6 +28,10 @@ const Register = ({ registerUser, setAlert }) => {
     } else {
       registerUser({ name, email, password })
     }
+  }
+
+  if (isAuth) {
+    return <Redirect to='/dashboard' />
   }
 
   return (
@@ -94,6 +98,11 @@ Register.propTypes = {
   setAlert: PropTypes.func.isRequired
 }
 
+const mapStateToProps = state => ({
+  isAuth: state.auth.isAuth
+})
+
+
 const mapDispatchToProps = dispatch => ({
   registerUser: ({ name, email, password }) =>
     dispatch(registerUser({ name, email, password })),
@@ -101,6 +110,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Register)

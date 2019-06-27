@@ -17,6 +17,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         user: action.payload
       }
     case AuthTypes.REGISTER_SUCCESS:
+    case AuthTypes.LOGIN_SUCCESS:
       localStorage.setItem('USER_TOKEN', action.payload.token)
       return {
         ...state,
@@ -25,6 +26,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         loading: false
       }
     case AuthTypes.REGISTER_FAIL:
+    case AuthTypes.LOGIN_FAIL:
     case AuthTypes.AUTH_ERROR:
         localStorage.removeItem('USER_TOKEN')
         return {

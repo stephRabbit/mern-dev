@@ -1,7 +1,11 @@
 import React, { Fragment, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-const Login = () => {
+import { loginUser } from '../../store/ducks/auth/actions'
+
+const Login = ({ loginUser, isAuth }) => {
   const [fromData, setFormData] = useState({
     email: '',
     password: ''
@@ -14,8 +18,13 @@ const Login = () => {
     setFormData({ ...fromData, [el.name]: el.value })
   }
 
-  const onSubmit = async e => {
+  const onSubmit = e => {
     e.preventDefault()
+    loginUser({ email, password })
+  }
+
+  if (isAuth) {
+    return <Redirect to='/dashboard' />
   }
 
   return (
@@ -54,4 +63,16 @@ const Login = () => {
   )
 }
 
-export default Login
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool,
+}
+
+const mapStateToProps = state => ({
+  isAuth: state.auth.isAuth
+})
+
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login)
