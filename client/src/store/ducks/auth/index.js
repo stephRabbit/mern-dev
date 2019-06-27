@@ -25,9 +25,10 @@ const reducer = (state = INITIAL_STATE, action) => {
         isAuth: true,
         loading: false
       }
-    case AuthTypes.REGISTER_FAIL:
-    case AuthTypes.LOGIN_FAIL:
     case AuthTypes.AUTH_ERROR:
+    case AuthTypes.LOGIN_FAIL:
+    case AuthTypes.LOGOUT:
+    case AuthTypes.REGISTER_FAIL:
         localStorage.removeItem('USER_TOKEN')
         return {
           ...state,

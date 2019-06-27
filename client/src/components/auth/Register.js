@@ -95,13 +95,13 @@ const Register = ({ registerUser, setAlert, isAuth }) => {
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool
 }
 
 const mapStateToProps = state => ({
   isAuth: state.auth.isAuth
 })
-
 
 const mapDispatchToProps = dispatch => ({
   registerUser: ({ name, email, password }) =>

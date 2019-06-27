@@ -69,3 +69,7 @@ export const loginUser = ({ email, password }) => async dispatch => {
     dispatch({ type: AuthTypes.LOGIN_FAIL })
   }
 }
+
+export const logout = () => dispatch => {
+  dispatch({ type: AuthTypes.LOGOUT })
+}
