@@ -7,18 +7,18 @@ import { setAlert } from '../../store/ducks/alert/actions'
 import { registerUser } from '../../store/ducks/auth/actions'
 
 const Register = ({ registerUser, setAlert, isAuth }) => {
-  const [fromData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     password2: ''
   })
 
-  const { name, email, password, password2 } = fromData
+  const { name, email, password, password2 } = formData
 
-  const onChangeInput = e => {
+  const onInputChange = e => {
     const el = e.target
-    setFormData({ ...fromData, [el.name]: el.value })
+    setFormData({ ...formData, [el.name]: el.value })
   }
 
   const onSubmit = async e => {
@@ -44,7 +44,7 @@ const Register = ({ registerUser, setAlert, isAuth }) => {
         <div className='form-group'>
           <input
             value={name}
-            onChange={onChangeInput}
+            onChange={onInputChange}
             type='text'
             placeholder='Name'
             name='name'
@@ -54,7 +54,7 @@ const Register = ({ registerUser, setAlert, isAuth }) => {
         <div className='form-group'>
           <input
             value={email}
-            onChange={onChangeInput}
+            onChange={onInputChange}
             type='email'
             placeholder='Email Address'
             name='email'
@@ -67,7 +67,7 @@ const Register = ({ registerUser, setAlert, isAuth }) => {
         <div className='form-group'>
           <input
             value={password}
-            onChange={onChangeInput}
+            onChange={onInputChange}
             type='password'
             placeholder='Password'
             name='password'
@@ -77,7 +77,7 @@ const Register = ({ registerUser, setAlert, isAuth }) => {
         <div className='form-group'>
           <input
             value={password2}
-            onChange={onChangeInput}
+            onChange={onInputChange}
             type='password'
             placeholder='Confirm Password'
             name='password2'

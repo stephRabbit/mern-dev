@@ -6,16 +6,16 @@ import PropTypes from 'prop-types'
 import { loginUser } from '../../store/ducks/auth/actions'
 
 const Login = ({ loginUser, isAuth }) => {
-  const [fromData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
 
-  const { email, password } = fromData
+  const { email, password } = formData
 
-  const onChangeInput = e => {
+  const onInputChange = e => {
     const el = e.target
-    setFormData({ ...fromData, [el.name]: el.value })
+    setFormData({ ...formData, [el.name]: el.value })
   }
 
   const onSubmit = e => {
@@ -37,7 +37,7 @@ const Login = ({ loginUser, isAuth }) => {
         <div className='form-group'>
           <input
             value={email}
-            onChange={onChangeInput}
+            onChange={onInputChange}
             type='email'
             placeholder='Email'
             name='email'
@@ -47,7 +47,7 @@ const Login = ({ loginUser, isAuth }) => {
         <div className='form-group'>
           <input
             value={password}
-            onChange={onChangeInput}
+            onChange={onInputChange}
             type='password'
             placeholder='Password'
             name='password'
