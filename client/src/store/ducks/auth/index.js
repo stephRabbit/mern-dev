@@ -34,7 +34,8 @@ const reducer = (state = INITIAL_STATE, action) => {
           ...state,
           token: null,
           isAuth: false,
-          loading: false
+          loading: false,
+          user: null
         }
     default:
       return state

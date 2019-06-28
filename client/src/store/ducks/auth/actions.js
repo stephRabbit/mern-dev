@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import setAuthToken from '../../../utils/setAuthToken'
 import { AuthTypes } from './types'
+import { ProfileTypes } from '../profile/types'
 import { setAlert } from '../alert/actions'
 
 export const loadUser = () => async dispatch => {
@@ -71,5 +72,6 @@ export const loginUser = ({ email, password }) => async dispatch => {
 }
 
 export const logout = () => dispatch => {
+  dispatch({ type: ProfileTypes.CLEAR_PROFILE })
   dispatch({ type: AuthTypes.LOGOUT })
 }
