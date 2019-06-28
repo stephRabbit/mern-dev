@@ -15,7 +15,7 @@ export const loadUser = () => async dispatch => {
       type: AuthTypes.USER_LOADED,
       payload: res.data
     })
-  } catch (error) {
+  } catch (err) {
     dispatch({ type: AuthTypes.AUTH_ERROR })
   }
 }
@@ -36,8 +36,8 @@ export const registerUser = ({ name, email, password }) => async dispatch => {
     })
 
     dispatch(loadUser())
-  } catch (error) {
-    const errors = error.response.data.errors
+  } catch (err) {
+    const errors = err.response.data.errors
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
     }
@@ -61,8 +61,8 @@ export const loginUser = ({ email, password }) => async dispatch => {
     })
 
     dispatch(loadUser())
-  } catch (error) {
-    const errors = error.response.data.errors
+  } catch (err) {
+    const errors = err.response.data.errors
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
     }

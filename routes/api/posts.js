@@ -37,8 +37,8 @@ router.post(
 
       const post = await new Post(newPost).save()
       res.send(post)
-    } catch (error) {
-      console.error(error.message)
+    } catch (err) {
+      console.error(err.message)
       res.status(500).send('Server error')
     }
   }
@@ -51,8 +51,8 @@ router.get('/', auth, async (req, res) => {
   try {
     const posts = await Post.find().sort({ date: -1 })
     res.json(posts)
-  } catch (error) {
-    console.error(error.message)
+  } catch (err) {
+    console.error(err.message)
     res.status(500).send('Server error')
   }
 })
@@ -69,9 +69,9 @@ router.get('/:id', auth, async (req, res) => {
     }
 
     res.json(post)
-  } catch (error) {
-    console.error(error.message)
-    if (error.kind === 'ObjectId') {
+  } catch (err) {
+    console.error(err.message)
+    if (err.kind === 'ObjectId') {
       return res.status(404).json({ msg: 'Post not found' })
     }
     res.status(500).send('Server error')
@@ -97,9 +97,9 @@ router.delete('/:id', auth, async (req, res) => {
     await post.remove()
 
     res.json({ msg: 'Post has been delete' })
-  } catch (error) {
-    console.error(error.message)
-    if (error.kind === 'ObjectId') {
+  } catch (err) {
+    console.error(err.message)
+    if (err.kind === 'ObjectId') {
       return res.status(404).json({ msg: 'Post not found' })
     }
     res.status(500).send('Server error')
@@ -122,9 +122,9 @@ router.put('/like/:id', auth, async (req, res) => {
     post.likes.unshift({ user: req.user.id })
     await post.save()
     res.json(post.likes)
-  } catch (error) {
-    console.error(error.message)
-    if (error.kind === 'ObjectId') {
+  } catch (err) {
+    console.error(err.message)
+    if (err.kind === 'ObjectId') {
       return res.status(404).json({ msg: 'Post not found' })
     }
     res.status(500).send('Server error')
@@ -152,9 +152,9 @@ router.put('/unlike/:id', auth, async (req, res) => {
 
     await post.save()
     res.json(post.likes)
-  } catch (error) {
-    console.error(error.message)
-    if (error.kind === 'ObjectId') {
+  } catch (err) {
+    console.error(err.message)
+    if (err.kind === 'ObjectId') {
       return res.status(404).json({ msg: 'Post not found' })
     }
     res.status(500).send('Server error')
@@ -192,8 +192,8 @@ router.post(
       post.comments.unshift(newComment)
       await post.save()
       res.json(post.comments)
-    } catch (error) {
-      console.error(error.message)
+    } catch (err) {
+      console.error(err.message)
       res.status(500).send('Server error')
     }
   }
@@ -226,8 +226,8 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     post.comments.splice(index, 1)
     await post.save()
     res.json(post.comments)
-  } catch (error) {
-    console.error(error.message)
+  } catch (err) {
+    console.error(err.message)
     res.status(500).send('Server error')
   }
 })
