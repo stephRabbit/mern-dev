@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { getProfile } from '../../store/ducks/profile/actions'
+import DashboardAction from './DashboardAction'
 
 import Spinner from '../layout/Spinner'
 
@@ -26,7 +27,7 @@ const Dashboard = ({
       </p>
       {!!profile ? (
         <Fragment>
-          has
+          <DashboardAction />
         </Fragment>
       ) : (
         <Fragment>
