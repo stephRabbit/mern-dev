@@ -1,9 +1,11 @@
 import React, { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const CreateProfile = props => {
+import { createUpdateProfile } from '../../store/ducks/profile/actions'
+
+const CreateProfile = ({ createUpdateProfile, history }) => {
   const [formData, setFormData] = useState({
     status: '',
     company: '',
@@ -43,6 +45,7 @@ const CreateProfile = props => {
 
   const onSubmit = e => {
     e.preventDefault()
+    createUpdateProfile(formData, history)
   }
 
   return (
@@ -52,7 +55,7 @@ const CreateProfile = props => {
         <i className='fas fa-user' /> Let's get some information to make your
         profile stand out
       </p>
-      <small>* = required field</small>
+      <small>*required field</small>
       <form className='form' onSubmit={onSubmit}>
         <div className='form-group'>
           <select name='status' onChange={onInputChange} value={status}>
@@ -141,7 +144,11 @@ const CreateProfile = props => {
           <small className='form-text'>Tell us a little about yourself</small>
         </div>
         <div className='my-2'>
-          <button onClick={() => toggleSocialInputs(!displaySocialInputs)}type='button' className='btn btn-light'>
+          <button
+            onClick={() => toggleSocialInputs(!displaySocialInputs)}
+            type='button'
+            className='btn btn-light'
+          >
             Add Social Network Links
           </button>
           <span>Optional</span>
@@ -209,6 +216,13 @@ const CreateProfile = props => {
   )
 }
 
-CreateProfile.propTypes = {}
+CreateProfile.propTypes = {
+  createUpdateProfile: PropTypes.func.isRequired
+}
 
-export default connect()(CreateProfile)
+export default withRouter(
+  connect(
+    null,
+    { createUpdateProfile }
+  )(CreateProfile)
+)
