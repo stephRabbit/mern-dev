@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
-import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { addEducation } from '../../store/ducks/profile/actions'
