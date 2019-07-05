@@ -1,4 +1,5 @@
 export const AuthTypes = {
+  ACCOUNT_DELETE: '@auth/auth_account_delete',
   AUTH_ERROR: '@auth/auth_error',
   LOGIN_SUCCESS: '@auth/auth_login_success',
   LOGIN_FAIL: '@auth/auth_login_fail',

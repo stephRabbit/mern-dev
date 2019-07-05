@@ -75,3 +75,28 @@ export const logout = () => dispatch => {
   dispatch({ type: ProfileTypes.CLEAR_PROFILE })
   dispatch({ type: AuthTypes.LOGOUT })
 }
+
+export const accountDelete = () => async dispatch => {
+  if (window.confirm('You sure? This can not be undone!')) {
+    try {
+      const res = await axios.delete('/api/profile')
+
+      dispatch({ type: ProfileTypes.CLEAR_PROFILE })
+
+      dispatch({
+        type: AuthTypes.ACCOUNT_DELETE,
+        payload: res.data
+      })
+
+      dispatch(setAlert('Your accout has been deleted'))
+    } catch (err) {
+      dispatch({
+        type: ProfileTypes.PROFILE_ERROR,
+        payload: {
+          msg: err.response.data.msg,
+          status: err.response.status
+        }
+      })
+    }
+  }
+}

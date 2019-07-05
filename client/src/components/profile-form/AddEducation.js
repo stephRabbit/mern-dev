@@ -7,6 +7,7 @@ import { addEducation } from '../../store/ducks/profile/actions'
 
 const AddEducation = ({ addEducation, history }) => {
   const [formData, setFormData] = useState({
+    current: false,
     school: '',
     degree: '',
     fieldofstudy: '',
@@ -15,11 +16,26 @@ const AddEducation = ({ addEducation, history }) => {
     description: ''
   })
 
-  const { school, degree, fieldofstudy, from, to, description } = formData
+  const [toDateDisabled, toggleToDateDisabled] = useState(false)
+
+  const {
+    current,
+    school,
+    degree,
+    fieldofstudy,
+    from,
+    to,
+    description
+  } = formData
 
   const onInputChange = e => {
     const el = e.target
     setFormData({ ...formData, [el.name]: el.value })
+  }
+
+  const onCheckChange = e => {
+    setFormData({ ...formData, current: !current })
+    toggleToDateDisabled(!toDateDisabled)
   }
 
   const onSubmit = e => {
@@ -76,8 +92,25 @@ const AddEducation = ({ addEducation, history }) => {
           />
         </div>
         <div className='form-group'>
+          <p>
+            <input
+              value={current}
+              onChange={onCheckChange}
+              type='checkbox'
+              name='current'
+            />{' '}
+            Current School
+          </p>
+        </div>
+        <div className='form-group'>
           <h4>To Date</h4>
-          <input value={to} onChange={onInputChange} type='date' name='to' />
+          <input
+            value={to}
+            onChange={onInputChange}
+            type='date'
+            name='to'
+            disabled={toDateDisabled ? 'disabled' : ''}
+          />
         </div>
         <div className='form-group'>
           <textarea

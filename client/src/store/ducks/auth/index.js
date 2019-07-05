@@ -25,6 +25,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         isAuth: true,
         loading: false
       }
+    case AuthTypes.ACCOUNT_DELETE:
     case AuthTypes.AUTH_ERROR:
     case AuthTypes.LOGIN_FAIL:
     case AuthTypes.LOGOUT:

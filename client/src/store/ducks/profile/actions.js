@@ -21,7 +21,11 @@ export const getProfile = () => async dispatch => {
   }
 }
 
-export const createUpdateProfile = (formData, history, edit = false) => async dispatch => {
+export const createUpdateProfile = (
+  formData,
+  history,
+  edit = false
+) => async dispatch => {
   try {
     const config = {
       headers: {
@@ -36,7 +40,14 @@ export const createUpdateProfile = (formData, history, edit = false) => async di
       payload: res.data
     })
 
-    dispatch(setAlert(edit ? 'Your profile has been updated': 'Your profile has been created', 'success'))
+    dispatch(
+      setAlert(
+        edit
+          ? 'Your profile has been updated'
+          : 'Your profile has been created',
+        'success'
+      )
+    )
 
     if (!edit) {
       history.push('/dashboard')
