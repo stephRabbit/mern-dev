@@ -255,6 +255,9 @@ router.put(
       check('degree', 'Degree is required')
         .not()
         .isEmpty(),
+      check('fieldofstudy', 'Field of Study is required')
+        .not()
+        .isEmpty(),
       check('from', 'Date is required')
         .not()
         .isEmpty()

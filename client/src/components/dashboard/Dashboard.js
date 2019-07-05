@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 
 import { getProfile } from '../../store/ducks/profile/actions'
 import DashboardAction from './DashboardAction'
+import Experience from './Experience'
+import Education from './Education'
 
 import Spinner from '../layout/Spinner'
 
@@ -28,6 +30,12 @@ const Dashboard = ({
       {!!profile ? (
         <Fragment>
           <DashboardAction />
+          {profile.experience.length > 0 && (
+            <Experience experience={profile.experience} />
+          )}
+          {profile.education.length > 0 && (
+            <Education education={profile.education} />
+          )}
         </Fragment>
       ) : (
         <Fragment>

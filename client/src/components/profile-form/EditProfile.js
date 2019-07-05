@@ -237,6 +237,7 @@ const EditProfile = ({
                 onChange={onInputChange}
               />
             </div>
+
           </Fragment>
         )}
 

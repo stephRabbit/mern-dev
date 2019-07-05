@@ -61,17 +61,18 @@ const AddEducation = ({ addEducation, history }) => {
             value={fieldofstudy}
             onChange={onInputChange}
             type='text'
-            placeholder='Field Of Study'
+            placeholder='* Field Of Study'
             name='fieldofstudy'
           />
         </div>
         <div className='form-group'>
-          <h4>From Date</h4>
+          <h4>* From Date</h4>
           <input
             value={from}
             onChange={onInputChange}
             type='date'
             name='from'
+            required
           />
         </div>
         <div className='form-group'>
