@@ -21,6 +21,61 @@ export const getProfile = () => async dispatch => {
   }
 }
 
+export const getAllProfiles = () => async dispatch => {
+  dispatch({ type: ProfileTypes.CLEAR_PROFILE })
+  try {
+    const res = await axios.get('api/profile')
+    dispatch({
+      type: ProfileTypes.GET_PROFILES,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: ProfileTypes.PROFILE_ERROR,
+      payload: {
+        msg: err.response.data.msg,
+        status: err.response.status
+      }
+    })
+  }
+}
+
+export const getProfileById = userId => async dispatch => {
+  try {
+    const res = await axios.get(`api/profile/user/${userId}`)
+    dispatch({
+      type: ProfileTypes.GET_PROFILES,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: ProfileTypes.PROFILE_ERROR,
+      payload: {
+        msg: err.response.data.msg,
+        status: err.response.status
+      }
+    })
+  }
+}
+
+export const getUserRepos = username => async dispatch => {
+  try {
+    const res = await axios.get(`/github/${username}`)
+    dispatch({
+      type: ProfileTypes.GET_REPOS,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: ProfileTypes.PROFILE_ERROR,
+      payload: {
+        msg: err.response.data.msg,
+        status: err.response.status
+      }
+    })
+  }
+}
+
 export const createUpdateProfile = (
   formData,
   history,
