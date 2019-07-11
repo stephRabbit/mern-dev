@@ -42,25 +42,23 @@ export const getAllProfiles = () => async dispatch => {
 
 export const getProfileById = userId => async dispatch => {
   try {
-    const res = await axios.get(`api/profile/user/${userId}`)
+    const res = await axios.get(`/api/profile/user/${userId}`)
+
     dispatch({
-      type: ProfileTypes.GET_PROFILES,
+      type: ProfileTypes.GET_PROFILE,
       payload: res.data
     })
   } catch (err) {
     dispatch({
       type: ProfileTypes.PROFILE_ERROR,
-      payload: {
-        msg: err.response.data.msg,
-        status: err.response.status
-      }
+      payload: { msg: err.response.statusText, status: err.response.status }
     })
   }
 }
 
 export const getUserRepos = username => async dispatch => {
   try {
-    const res = await axios.get(`/github/${username}`)
+    const res = await axios.get(`/api/profile/github/${username}`)
     dispatch({
       type: ProfileTypes.GET_REPOS,
       payload: res.data
