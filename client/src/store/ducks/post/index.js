@@ -14,6 +14,12 @@ const reducer = (state = INITIAL_STATE, action) => {
         posts: action.payload,
         loading: false
       }
+    case PostTypes.DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter(post => post._id !== action.payload),
+        loading: false
+      }
     case PostTypes.UPDATE_LIKES:
       return {
         ...state,
