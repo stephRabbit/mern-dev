@@ -4,9 +4,13 @@ import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
 import PropTypes from 'prop-types'
 
+import { addLike, removeLike } from '../../store/ducks/post/actions'
+
 const PostItem = ({
+  addLike,
   auth,
-  post: { _id, text, name, avatar, user, likes, comments, date }
+  post: { _id, text, name, avatar, user, likes, comments, date },
+  removeLike
 }) => {
   return (
     <div className='post bg-white p-1 my-1'>
@@ -21,11 +25,11 @@ const PostItem = ({
         <p className='post-date'>
           Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
         </p>
-        <button type='button' className='btn btn-light'>
+        <button onClick={e => addLike(_id)} type='button' className='btn btn-light'>
           <i className='fas fa-thumbs-up' />{' '}
           {likes.length > 0 && <span>{likes.length}</span>}
         </button>
-        <button type='button' className='btn btn-light'>
+        <button onClick={e => removeLike(_id)} type='button' className='btn btn-light'>
           <i className='fas fa-thumbs-down' />
         </button>
         <Link to={`/post/${_id}`} className='btn btn-primary'>
@@ -45,8 +49,10 @@ const PostItem = ({
 }
 
 PostItem.propTypes = {
+  addLike: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  removeLike:  PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -55,5 +61,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  {addLike, removeLike}
 )(PostItem)
