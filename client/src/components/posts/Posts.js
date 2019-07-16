@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { getPosts } from '../../store/ducks/post/actions'
 import Spinner from '../layout/Spinner'
 import PostForm from './PostForm'
-import PostItmem from './PostItem'
+import PostItem from './PostItem'
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
   useEffect(() => {
@@ -25,7 +25,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
       <PostForm />
       <div className='posts'>
         {posts.map(post => (
-          <PostItmem key={post._id} post={post} />
+          <PostItem key={post._id} post={post} />
         ))}
       </div>
     </Fragment>

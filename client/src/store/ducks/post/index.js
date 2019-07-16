@@ -14,10 +14,33 @@ const reducer = (state = INITIAL_STATE, action) => {
         posts: [action.payload, ...state.posts],
         loading: false
       }
+    case PostTypes.ADD_COMMENT:
+      return {
+        ...state,
+        post: { ...state.post, comments: action.payload },
+        loading: false
+      }
+    case PostTypes.REMOVE_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: state.post.comments.filter(
+            comment => comment._id !== action.payload
+          )
+        },
+        loading: false
+      }
     case PostTypes.GET_POSTS:
       return {
         ...state,
         posts: action.payload,
+        loading: false
+      }
+    case PostTypes.GET_POST:
+      return {
+        ...state,
+        post: action.payload,
         loading: false
       }
     case PostTypes.DELETE_POST:

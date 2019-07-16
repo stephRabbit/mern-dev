@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { addPost } from '../../store/ducks/post/actions'
+import { addComment } from '../../../store/ducks/post/actions'
 
-const PostForm = ({ addPost }) => {
+const CommentForm = ({ addComment, postId }) => {
+  console.log()
   const [formData, setFormData] = useState({
     text: ''
   })
@@ -18,14 +19,14 @@ const PostForm = ({ addPost }) => {
 
   const onSubmit = e => {
     e.preventDefault()
-    addPost(formData)
+    addComment(postId, formData)
     setFormData({ ...formData, text: '' })
   }
 
   return (
     <div className='post-form'>
       <div className='bg-primary p'>
-        <h3>Say Something...</h3>
+        <h3>Leave A Comment</h3>
       </div>
       <form onSubmit={onSubmit} className='form my-1'>
         <textarea
@@ -38,7 +39,7 @@ const PostForm = ({ addPost }) => {
           onChange={onInputChange}
         />
         <input
-          disabled={!text ? 'disabled' : ''}
+          disabled={!text}
           type='submit'
           className='btn btn-dark my-1'
           value='Submit'
@@ -48,11 +49,12 @@ const PostForm = ({ addPost }) => {
   )
 }
 
-PostForm.propTypes = {
-  addPost: PropTypes.func.isRequired
+CommentForm.propTypes = {
+  addComment: PropTypes.func.isRequired,
+  postId: PropTypes.string.isRequired,
 }
 
 export default connect(
   null,
-  { addPost }
-)(PostForm)
+  { addComment }
+)(CommentForm)
